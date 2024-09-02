@@ -1,0 +1,156 @@
+﻿@model POC.Models.RegistrationViewModel
+
+@{
+    ViewData["Title"] = "Registration";
+}
+
+
+<style>
+    body {
+        margin: 0;
+        color: #6a6f8c;
+        background: #c8c8c8;
+        font: 600 16px/18px 'Open Sans', sans-serif;
+    }
+
+    .register-box {
+        width: 100%;
+        margin: auto;
+        max-width: 450px; 
+        min-height: 615px;
+        position: relative;
+        background: url(https://images.unsplash.com/photo-1507208773393-40d9fc670acf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1268&q=80) no-repeat center;
+        box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19);
+    }
+
+    .register-snip {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        padding: 60px 30px 50px 30px; 
+        background: rgba(0, 77, 77, .9);
+    }
+
+    .register-space {
+        min-height: 450px;
+        position: relative;
+        perspective: 1000px;
+        transform-style: preserve-3d;
+    }
+
+        .register-space .group {
+            margin-bottom: 15px;
+        }
+
+            .register-space .group .label,
+            .register-space .group .input,
+            .register-space .group .button {
+                width: 100%;
+                color: #fff;
+                display: block;
+                font-size: 14px; 
+            }
+
+            .register-space .group .input,
+            .register-space .group .button {
+                border: none;
+                padding: 10px 12px; 
+                border-radius: 20px; 
+                background: rgba(255, 255, 255, .1);
+            }
+
+            .register-space .group input[data-type="password"] {
+                text-security: circle;
+                -webkit-text-security: circle;
+            }
+
+            .register-space .group .label {
+                color: #aaa;
+                font-size: 12px;
+            }
+
+            .register-space .group .button {
+                background: #1161ee;
+            }
+
+    .hr {
+        height: 2px;
+        margin: 30px 0 30px 0; 
+        background: rgba(255, 255, 255, .2);
+    }
+
+    .foot {
+        text-align: center;
+    }
+
+    .card {
+        width: 430px;
+        left: 100px;
+    }
+
+    ::placeholder {
+        color: #b3b3b3;
+    }
+</style>
+
+<div class="register-box">
+    <div class="register-snip">
+        <div class="register-space">
+            <div class="register">
+                <h1 style="color: #fff; text-align: center; font-size: 24px;">Registration</h1> <!-- Reduced font size -->
+                <hr />
+                <form asp-action="Registration">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    @if (ViewBag.Message != null)
+                    {
+                        <div class="form-group" style="color: green;">@ViewBag.Message</div>
+                    }
+                    <div class="group">
+                        <label asp-for="Id" class="label"></label>
+                        <input asp-for="Id" class="input" />
+                        <span asp-validation-for="Id" class="text-danger"></span>
+                    </div>
+                    <div class="group">
+                        <label asp-for="FirstName" class="label"></label>
+                        <input asp-for="FirstName" class="input" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="group">
+                        <label asp-for="LastName" class="label"></label>
+                        <input asp-for="LastName" class="input" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="group">
+                        <label asp-for="Email" class="label"></label>
+                        <input asp-for="Email" class="input" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="group">
+                        <label asp-for="UserName" class="label"></label>
+                        <input asp-for="UserName" class="input" />
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+                    <div class="group">
+                        <label asp-for="Password" class="label"></label>
+                        <input asp-for="Password" class="input" type="password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="group">
+                        <label asp-for="ConfirmPassword" class="label"></label>
+                        <input asp-for="ConfirmPassword" class="input" type="password" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <div class="group">
+                        <input type="submit" value="Register" class="button" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,25 @@
+﻿@model POC.Entities.CrudItem
+
+<h2>Details</h2>
+
+<div class="mb-3">
+    <label><strong>Title:</strong></label>
+    <span>@Model.Title</span>
+</div>
+<div class="mb-3">
+    <label><strong>Description:</strong></label>
+    <span>@Model.Description</span>
+</div>
+<div class="mb-3">
+    <label><strong>Due Date:</strong></label>
+    <span>@Model.DueDate.ToShortDateString()</span>
+</div>
+<div class="mb-3">
+    <label><strong>Status:</strong></label>
+    <span>@Model.Status</span>
+</div>
+
+
+<a asp-action="Edit" asp-controller="CRUD" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+<a asp-action="Delete" asp-controller="CRUD" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+<a asp-action="SecurePage" asp-controller="Account" class="btn btn-secondary">Back to List</a>

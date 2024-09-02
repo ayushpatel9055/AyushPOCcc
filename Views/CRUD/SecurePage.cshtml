@@ -1,0 +1,95 @@
+﻿@model IEnumerable<POC.Entities.CrudItem>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Operation</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background: linear-gradient(to right, #b92b27, #1565c0);
+        }
+
+        .form-inline {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 0;
+        }
+
+            .form-group select {
+                margin-right: 10px;
+            }
+
+        .btn-primary {
+            margin-top: 10px;
+        }
+
+        table {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>CRUD Operation</h2>
+
+        <form method="get" asp-action="SecurePage" asp-controller="CRUD" class="form-inline mb-3">
+            <div class="form-group mr-2">
+                <label for="statusFilter" class="mr-2">Filter by Status:</label>
+                @Html.DropDownList("statusFilter", ViewBag.StatusList as SelectList, new { @class = "form-control" })
+            </div>
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </form>
+
+        <div class="mb-3">
+            <a asp-action="Create" asp-controller="CRUD" class="btn btn-success">Create</a>
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Title</td>
+                        <td>@item.Description</td>
+                        <td>@item.DueDate.ToShortDateString()</td>
+                        <td>@item.Status</td>
+                        <td>
+                            <a asp-action="Edit" asp-controller="CRUD" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
+                            <a asp-action="Details" asp-controller="CRUD" asp-route-id="@item.Id" class="btn btn-info">Details</a>
+                            <a asp-action="Delete" asp-controller="CRUD" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
